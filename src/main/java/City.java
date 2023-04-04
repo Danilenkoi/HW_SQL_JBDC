@@ -1,24 +1,52 @@
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "city")
 public class City {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
+    private Integer id;
+    @Column(name = "name", nullable = false)
+    private String cityName;
 
-    int city_id;
-    String city_name;
-
-    public City (int city_id, String city_name){
-        this.city_id = city_id;
-        this.city_name = city_name;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<Employee> employeeList;
+    public City(String cityName) {
+        this.cityName = cityName;
     }
 
-    public int getCity_id(){
-        return city_id;
-    }
-    public void setCity_id(int city_id){
-        this.city_id = city_id;
+    public City() {
+
     }
 
-    public String getCity_name(){
-        return city_name;
+    public String getCityName() {
+        return cityName;
     }
-    public void setCity_name(String city_name){
-        this.city_name = city_name;
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    @Override
+    public String toString() {
+        return "City: " + cityName;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
     }
 }

@@ -1,20 +1,20 @@
-import java.sql.SQLException;
+
 import java.util.List;
+
 
 public interface EmployeeDAO {
 
-    // a.
-    List <Employee> createEmployee(Employee employee);
+    void addEmployee(Employee employee);
+    Employee getEmployeeByID(Integer id);
+    void removeEmployee(Employee employee);
 
-    //b.
-    List <Employee> getEmployeeById(int id);
+    List<Employee> getEmployeeList();
 
-    //c.
-    List <Employee> getAllEmployee();
+    void changeFirstName(Employee employee, String newValue);
+    void changeLastName(Employee employee, String newValue);
+    void changeGender(Employee employee, String newValue);
+    void changeAge(Employee employee, Integer newValue);
+    void changeCity(Employee employee, City newValue);
+    void removeEmployeeByID(Integer id);
 
-    //d.
-    List <Employee> updateEmployee(Employee employee);
-
-    //e.
-    List <Employee> deleteEmployee(int id);
 }

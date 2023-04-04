@@ -1,18 +1,28 @@
+import javax.persistence.*;
 import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-        List <Employee> staffAll = employeeDAO.getAllEmployee();
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
 
-        for (Employee employee : staffAll) {
-            System.out.println("Employee ID: " + employee.getId());
-            System.out.println("First_name: " + employee.getFirst_name());
-            System.out.println("Last_name: " + employee.getLast_name());
-            System.out.println("Gender: " + employee.getGender());
-            System.out.println("Age: " + employee.getAge());
-            System.out.println("City_id: " + employee.getCity_id());
-        }
+        EmployeeDAO employeeDAO = new EmployeeDAOImpl(entityManager);
+        Employee employee = new Employee("Gleb", "Petrov", "male", 39, city);
+        employeeDAO.changeAge(employee, 30);
+        employeeDAO.addEmployee(employee);
+        employeeDAO.addEmployee(employee);
+        employeeDAO.changeFirstName(employee, "Luna");
+        employeeDAO.changeFirstName(employeeDAO.getEmployeeByID(12), "Georg");
+        System.out.println(employeeDAO.getEmployeeList());
+        employeeDAO.removeEmployeeByID(8);
+        System.out.println(employee.getCity());
+        employeeDAO.removeEmployeeByID(3);
+        System.out.println(city);
+
+
+        entityManager.close();
+        entityManagerFactory.close();
     }
 }
 
