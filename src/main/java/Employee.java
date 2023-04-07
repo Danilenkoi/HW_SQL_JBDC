@@ -14,6 +14,9 @@ public class Employee extends City {
     private String gender;
     @Column(name = "age")
     private Integer age;
+
+    // Я выбрал данный тип LAZY. Т.к. у нас могут возникнуть проблемы с производительностью. Потому что значения
+    // (некоторые) нам нужны не всегда, а мы все равно выбираем эти объекты в память сервера.
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;

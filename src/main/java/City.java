@@ -11,11 +11,12 @@ public class City {
     @Column(name = "name", nullable = false)
     private String cityName;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Employee> employeeList;
     public City(String cityName) {
         this.cityName = cityName;
     }
+
 
     public City() {
 
